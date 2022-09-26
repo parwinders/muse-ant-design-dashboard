@@ -12,10 +12,20 @@
 
 // import { useState } from "react";
 import { Menu, Button } from 'antd';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 
 function Sidenav({ color }) {
+    const history = useHistory();
+    const [cookies, setCookie, removeCookie] = useCookies(['token', 'email']);
+    var removeToken = async () => {
+        console.log('remove cookie');
+        await removeCookie('token');
+        await removeCookie('email');
+        history.push('/sign-in');
+    };
     const { pathname } = useLocation();
     const page = pathname.replace('/', '');
 
@@ -248,6 +258,12 @@ function Sidenav({ color }) {
             <span className="label">Sign Up</span>
           </NavLink>
         </Menu.Item> */}
+                <Menu.Item key='9'>
+                    <a href='#!' onClick={() => removeToken()}>
+                        <span className='icon'>{signup}</span>
+                        <span className='label'>Logout</span>
+                    </a>
+                </Menu.Item>
             </Menu>
             <div className='aside-footer'>
                 <div

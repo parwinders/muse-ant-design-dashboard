@@ -162,10 +162,12 @@ const SignIn = () => {
                 console.log({ responseData });
                 const Token = responseData.access_token;
                 // storing
-                console.log('accessToken:', Token);
-                window.access_token = Token;
+                console.log('storing accessToken:', Token);
+                console.log('storing email', email);
                 await setCookie('token', Token);
-                history.push('/dashboard');
+                await setCookie('email', email);
+                console.log(cookies);
+                history.push('/profile');
 
                 // continue to show antd modal for Email OTP
                 setOpen(false);
@@ -269,7 +271,7 @@ const SignIn = () => {
                     </div>
                     <div className='header-col header-nav'>
                         <Menu mode='horizontal' defaultSelectedKeys={['1']}>
-                            <Menu.Item key='1'>
+                            {/* <Menu.Item key='1'>
                                 <Link to='/dashboard'>
                                     {template}
                                     <span> Dashboard</span>
@@ -280,7 +282,7 @@ const SignIn = () => {
                                     {profile}
                                     <span>Profile</span>
                                 </Link>
-                            </Menu.Item>
+                            </Menu.Item> */}
                             <Menu.Item key='3'>
                                 <Link to='/sign-up'>
                                     {signup}

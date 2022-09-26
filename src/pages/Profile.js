@@ -10,6 +10,7 @@
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 
 import {
     Row,
@@ -44,18 +45,16 @@ import project2 from '../assets/images/home-decor-2.jpeg';
 import project3 from '../assets/images/home-decor-3.jpeg';
 
 function Profile() {
+    const [cookies, ,] = useCookies(['email']);
     const [imageURL, setImageURL] = useState(false);
     const [, setLoading] = useState(false);
 
     const init = async () => {
         try {
             var myHeaders = new Headers();
-            myHeaders.append('X-User-Email', 'p4rw1nd3r+1@gmail.com');
+            myHeaders.append('X-User-Email', cookies.email);
             myHeaders.append('Accept', 'application/json');
-            myHeaders.append(
-                'Authorization',
-                'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwNHJ3MW5kM3IrMUBnbWFpbC5jb20iLCJleHAiOjE2NjQyODkzNjMsImlhdCI6MTY2NDIwMjk2M30.vCfOQE4W03ButTwW7r97kbdXriR-Uq3IdiXI1ZvDHCJpXV_CFT6qkZKm8Wq38D1KcOW4bOWzn-FEtScQxNeymA'
-            );
+            myHeaders.append('Authorization', `Bearer ${cookies.token}`);
 
             var requestOptions = {
                 method: 'GET',
@@ -63,7 +62,7 @@ function Profile() {
                 redirect: 'follow',
             };
 
-            const response = fetch(
+            const response = await fetch(
                 'http://192.9.251.39:8080/user',
                 requestOptions
             );
@@ -221,7 +220,7 @@ function Profile() {
 
                                 <div className='avatar-info'>
                                     <h4 className='font-semibold m-0'>
-                                        Sarah Jacob
+                                        {cookies.email}
                                     </h4>
                                     <p>CEO / Co-Founder</p>
                                 </div>

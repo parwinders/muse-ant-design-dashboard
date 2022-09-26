@@ -60,7 +60,6 @@ function Home() {
             history.push('/sign-in');
         }
     }, [cookies]);
-    window.setCookie = setCookie;
     const { Title, Text } = Typography;
 
     const onChange = (e) => console.log(`radio checked:${e.target.value}`);
