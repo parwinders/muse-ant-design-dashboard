@@ -37,7 +37,7 @@ function App() {
                     <Route exact path='/billing' component={Billing} />
                     <Route exact path='/rtl' component={Rtl} />
                     <Route exact path='/profile' component={Profile} />
-                    <Redirect from='*' to='/profile' />
+                    <Redirect from='*' to='/dashboard' />
                 </Main>
             </Switch>
         </div>
