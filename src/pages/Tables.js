@@ -1,661 +1,236 @@
-/*!
-=========================================================
-* Muse Ant Design Dashboard - v1.0.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-* Coded by Creative Tim
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+import { useState, useEffect } from "react";
+
 import {
-  Row,
-  Col,
   Card,
-  Radio,
   Table,
-  Upload,
-  message,
-  Progress,
-  Button,
-  Avatar,
-  Typography,
+  Input
 } from "antd";
 
-import { ToTopOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 
-// Images
-import ava1 from "../assets/images/logo-shopify.svg";
-import ava2 from "../assets/images/logo-atlassian.svg";
-import ava3 from "../assets/images/logo-slack.svg";
-import ava5 from "../assets/images/logo-jira.svg";
-import ava6 from "../assets/images/logo-invision.svg";
-import face from "../assets/images/face-1.jpg";
-import face2 from "../assets/images/face-2.jpg";
-import face3 from "../assets/images/face-3.jpg";
-import face4 from "../assets/images/face-4.jpg";
-import face5 from "../assets/images/face-5.jpeg";
-import face6 from "../assets/images/face-6.jpeg";
-import pencil from "../assets/images/pencil.svg";
-
-const { Title } = Typography;
-
-const formProps = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-// table code start
-const columns = [
-  {
-    title: "AUTHOR",
-    dataIndex: "name",
-    key: "name",
-    width: "32%",
-  },
-  {
-    title: "FUNCTION",
-    dataIndex: "function",
-    key: "function",
-  },
-
-  {
-    title: "STATUS",
-    key: "status",
-    dataIndex: "status",
-  },
-  {
-    title: "EMPLOYED",
-    key: "employed",
-    dataIndex: "employed",
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face2}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Michael John</Title>
-            <p>michael@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Manager</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/04/18</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "2",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face3}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Alexa Liras</Title>
-            <p>alexa@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Programator</Title>
-          <p>Developer</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/12/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "3",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Laure Perrier</Title>
-            <p>laure@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Executive</Title>
-          <p>Projects</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>03/04/21</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-  {
-    key: "4",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face4}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Miriam Eric</Title>
-            <p>miriam@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Marketing</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>03/04/21</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-  {
-    key: "5",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face5}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Richard Gran</Title>
-            <p>richard@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Manager</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/03/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "6",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-            src={face6}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>John Levi</Title>
-            <p>john@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Tester</Title>
-          <p>Developer</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>14/04/17</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-];
-// project table start
-const project = [
-  {
-    title: "COMPANIES",
-    dataIndex: "name",
-    width: "32%",
-  },
-  {
-    title: "BUDGET",
-    dataIndex: "age",
-  },
-  {
-    title: "STATUS",
-    dataIndex: "address",
-  },
-  {
-    title: "COMPLETION",
-    dataIndex: "completion",
-  },
-];
-const dataproject = [
-  {
-    key: "1",
-
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" src={ava1} size={25} alt="" />
-          <div className="avatar-info">
-            <Title level={5}>Spotify Version</Title>
-          </div>
-        </Avatar.Group>
-      </>
-    ),
-    age: (
-      <>
-        <div className="semibold">$14,000</div>
-      </>
-    ),
-    address: (
-      <>
-        <div className="text-sm">working</div>
-      </>
-    ),
-    completion: (
-      <>
-        <div className="ant-progress-project">
-          <Progress percent={30} size="small" />
-          <span>
-            <Link to="/">
-              <img src={pencil} alt="" />
-            </Link>
-          </span>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "2",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" src={ava2} size={25} alt="" />
-          <div className="avatar-info">
-            <Title level={5}>Progress Track</Title>
-          </div>
-        </Avatar.Group>
-      </>
-    ),
-    age: (
-      <>
-        <div className="semibold">$3,000</div>
-      </>
-    ),
-    address: (
-      <>
-        <div className="text-sm">working</div>
-      </>
-    ),
-    completion: (
-      <>
-        <div className="ant-progress-project">
-          <Progress percent={10} size="small" />
-          <span>
-            <Link to="/">
-              <img src={pencil} alt="" />
-            </Link>
-          </span>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "3",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" src={ava3} size={25} alt="" />
-          <div className="avatar-info">
-            <Title level={5}> Jira Platform Errors</Title>
-          </div>
-        </Avatar.Group>
-      </>
-    ),
-    age: (
-      <>
-        <div className="semibold">Not Set</div>
-      </>
-    ),
-    address: (
-      <>
-        <div className="text-sm">done</div>
-      </>
-    ),
-    completion: (
-      <>
-        <div className="ant-progress-project">
-          <Progress percent={100} size="small" format={() => "done"} />
-          <span>
-            <Link to="/">
-              <img src={pencil} alt="" />
-            </Link>
-          </span>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "4",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" src={ava5} size={25} alt="" />
-          <div className="avatar-info">
-            <Title level={5}> Launch new Mobile App</Title>
-          </div>
-        </Avatar.Group>
-      </>
-    ),
-    age: (
-      <>
-        <div className="semibold">$20,600</div>
-      </>
-    ),
-    address: (
-      <>
-        <div className="text-sm">canceled</div>
-      </>
-    ),
-    completion: (
-      <>
-        <div className="ant-progress-project">
-          <Progress
-            percent={50}
-            size="small"
-            status="exception"
-            format={() => "50%"}
-          />
-          <span>
-            <Link to="/">
-              <img src={pencil} alt="" />
-            </Link>
-          </span>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "5",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" src={ava5} size={25} alt="" />
-          <div className="avatar-info">
-            <Title level={5}>Web Dev</Title>
-          </div>
-        </Avatar.Group>
-      </>
-    ),
-    age: (
-      <>
-        <div className="semibold">$4,000</div>
-      </>
-    ),
-    address: (
-      <>
-        <div className="text-sm">working</div>
-      </>
-    ),
-    completion: (
-      <>
-        <div className="ant-progress-project">
-          <Progress percent={80} size="small" />
-          <span>
-            <Link to="/">
-              <img src={pencil} alt="" />
-            </Link>
-          </span>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "6",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar className="shape-avatar" src={ava6} size={25} alt="" />
-          <div className="avatar-info">
-            <Title level={5}>Redesign Online Store</Title>
-          </div>
-        </Avatar.Group>
-      </>
-    ),
-    age: (
-      <>
-        <div className="semibold">$2,000</div>
-      </>
-    ),
-    address: (
-      <>
-        <div className="text-sm">canceled</div>
-      </>
-    ),
-    completion: (
-      <>
-        <div className="ant-progress-project">
-          <Progress percent={0} size="small" />
-          <span>
-            <Link to="/">
-              <img src={pencil} alt="" />
-            </Link>
-          </span>
-        </div>
-      </>
-    ),
-  },
-];
 
 function Tables() {
-  const onChange = (e) => console.log(`radio checked:${e.target.value}`);
+  const [filteredData, setFilteredData] = useState([]);
+  const [rawdata, setRawData] = useState([]);
+
+  useEffect(() => {
+    const asyncFetch = async () => {
+      const allCoin = await fetchedCoinBalance()
+      let coinArr = allCoin.coin_balance
+      coinArr = coinArr.map((rec) => { return { ...rec, key: rec.coin_id } })
+      setFilteredData(coinArr);
+      setRawData(coinArr);
+      console.log('coinArr', coinArr);
+    };
+    asyncFetch();
+  }, [])
+
+
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'coin_name',
+      key: 'coin_name',
+
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+      sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: 'Balance',
+      dataIndex: 'total_balance',
+      key: 'total_balance',
+    },
+  ];
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+  };
+
 
   return (
     <>
-      <div className="tabled">
-        <Row gutter={[24, 0]}>
-          <Col xs="24" xl={24}>
-            <Card
-              bordered={false}
-              className="criclebox tablespace mb-24"
-              title="Authors Table"
-              extra={
-                <>
-                  <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button value="a">All</Radio.Button>
-                    <Radio.Button value="b">ONLINE</Radio.Button>
-                  </Radio.Group>
-                </>
-              }
-            >
-              <div className="table-responsive">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  pagination={false}
-                  className="ant-border-space"
-                />
-              </div>
-            </Card>
 
-            <Card
-              bordered={false}
-              className="criclebox tablespace mb-24"
-              title="Projects Table"
-              extra={
-                <>
-                  <Radio.Group onChange={onChange} defaultValue="all">
-                    <Radio.Button value="all">All</Radio.Button>
-                    <Radio.Button value="online">ONLINE</Radio.Button>
-                    <Radio.Button value="store">STORES</Radio.Button>
-                  </Radio.Group>
-                </>
-              }
-            >
-              <div className="table-responsive">
-                <Table
-                  columns={project}
-                  dataSource={dataproject}
-                  pagination={false}
-                  className="ant-border-space"
-                />
-              </div>
-              <div className="uploadfile pb-15 shadow-none">
-                <Upload {...formProps}>
-                  <Button
-                    type="dashed"
-                    className="ant-full-box"
-                    icon={<ToTopOutlined />}
-                  >
-                    Click to Upload
-                  </Button>
-                </Upload>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+      <Card
+        bordered={false}
+        className="criclebox tablespace mb-24"
+        title="Crypto Asset Balance Sheet"
+      >
+        <Input placeholder="Search Crypto Asset" onChange={(e) => {
+          let filteredData = rawdata.filter((coinDoc) =>
+            coinDoc.coin_name.toLowerCase().startsWith(e.target.value.toLowerCase())
+          )
+          setFilteredData(filteredData)
+
+        }
+        } />
+
+        <Table dataSource={filteredData} columns={columns} onChange={onChange} />;
+      </Card>
+
     </>
   );
+}
+
+
+const fetchedCoinBalance = async () => {
+  // try {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("X-User-Email", "p4rw1nd3r+1@gmail.com");
+  //   myHeaders.append("Accept", "application/json");
+  //   myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwNHJ3MW5kM3IrMUBnbWFpbC5jb20iLCJleHAiOjE2NjQ0Mzc5MTgsImlhdCI6MTY2NDM1MTUxOH0.-y_VFSiTIMfER3m77OQ4kTBWH2qL1nG_Hqw40rB54sZ_OsJ1zg-9CkWghVf12K6n02dBuibYtPGS-wbZ71PNZg");
+
+  //   var requestOptions = {
+  //     method: 'GET',
+  //     headers: myHeaders,
+  //     redirect: 'follow'
+  //   };
+
+  //   const response = await fetch("http://192.9.251.39:8080/getDetailedBalance", requestOptions);
+  //   console.log(response)
+
+  // } catch (error) {
+  //   console.log(error)
+  //   console.log('fetch failed')
+  // }
+
+
+
+  console.log(' Demo fetch for now');
+  return ({
+    "total_balance": 0,
+    "idle_balance": 0,
+    "saving_balance": 0,
+    "staking_balance": 0,
+    "yesterday_earnings": null,
+    "lifetime_earnings": null,
+    "coin_balance": [
+      {
+        "coin_id": 9,
+        "coin_name": "Cardano",
+        "price": 0.464183,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 8,
+        "coin_name": "Polkadot",
+        "price": 6.89,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 7,
+        "coin_name": "Polygon",
+        "price": 0.813586,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 6,
+        "coin_name": "Solana",
+        "price": 32.7,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 5,
+        "coin_name": "Ethereum",
+        "price": 1464.05,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 4,
+        "coin_name": "Bitcoin",
+        "price": 19774.16,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 3,
+        "coin_name": "DAI",
+        "price": 1.0,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 2,
+        "coin_name": "USD Coin",
+        "price": 1.001,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 1,
+        "coin_name": "Tether",
+        "price": 1.001,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 11,
+        "coin_name": "BUSD",
+        "price": 1.001,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      },
+      {
+        "coin_id": 10,
+        "coin_name": "BNB",
+        "price": 275.52,
+        "total_balance": null,
+        "idle_balance": null,
+        "saving_balance": null,
+        "staking_balance": null,
+        "yesterday_earnings": null,
+        "lifetime_earnings": null
+      }
+    ]
+  })
 }
 
 export default Tables;
