@@ -151,7 +151,7 @@ const SignUp = () => {
             };
 
             const response = await fetch(
-                'http://192.9.251.39:8080/loginOtp',
+                'https://apiserver.dolf.finance/loginOtp',
                 requestOptions
             );
             if (response.status === 200) {
@@ -192,7 +192,7 @@ const SignUp = () => {
         console.log('Success:', values);
 
         // try {
-        //   const url = `http://192.9.251.39:8080/user`
+        //   const url = `https://apiserver.dolf.finance/user`
         //   // const url = `${process.env.REACT_APP_API_BASE_URL}/user`
         //   console.log('fetching', url)
         //   const response = await _fetch(url, {

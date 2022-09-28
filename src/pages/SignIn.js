@@ -153,7 +153,7 @@ const SignIn = () => {
             };
 
             const response = await fetch(
-                'http://192.9.251.39:8080/loginOtp',
+                'https://apiserver.dolf.finance/loginOtp',
                 requestOptions
             );
             if (response.status === 200) {
@@ -210,7 +210,7 @@ const SignIn = () => {
         };
 
         const response = await fetch(
-            'http://192.9.251.39:8080/login',
+            'https://apiserver.dolf.finance/login',
             requestOptions
         );
         if (response.status === 200) {

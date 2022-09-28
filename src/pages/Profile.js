@@ -63,7 +63,7 @@ function Profile() {
             };
 
             const response = await fetch(
-                'http://192.9.251.39:8080/user',
+                'https://apiserver.dolf.finance/user',
                 requestOptions
             );
             if (response.status === 200) {
